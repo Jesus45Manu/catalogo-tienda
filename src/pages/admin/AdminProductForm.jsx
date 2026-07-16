@@ -13,6 +13,7 @@ function AdminProductForm() {
   })
   const [cargando, setCargando] = useState(esEdicion)
   const [guardando, setGuardando] = useState(false)
+  const [subiendoImagen, setSubiendoImagen] = useState(false)
   const [error, setError] = useState('')
 
   useEffect(() => {
@@ -45,6 +46,27 @@ function AdminProductForm() {
 
   function handleChange(campo, valor) {
     setForm((prev) => ({ ...prev, [campo]: valor }))
+  }
+
+  async function handleImagenChange(e) {
+    const archivo = e.target.files[0]
+    if (!archivo) return
+
+    setSubiendoImagen(true)
+    const extension = archivo.name.split('.').pop()
+    const nombreArchivo = `${crypto.randomUUID()}.${extension}`
+
+    const { error } = await supabase.storage.from('productos').upload(nombreArchivo, archivo)
+
+    if (error) {
+      alert('No se pudo subir la imagen: ' + error.message)
+      setSubiendoImagen(false)
+      return
+    }
+
+    const { data } = supabase.storage.from('productos').getPublicUrl(nombreArchivo)
+    handleChange('imagen_url', data.publicUrl)
+    setSubiendoImagen(false)
   }
 
   async function handleSubmit(e) {
@@ -107,10 +129,24 @@ function AdminProductForm() {
             {categorias.map((cat) => <option key={cat.id} value={cat.id}>{cat.nombre}</option>)}
           </select>
         </div>
+
         <div>
-          <label className="text-sm text-gray-600">URL de imagen (por ahora — subida de fotos viene después)</label>
-          <input value={form.imagen_url} onChange={(e) => handleChange('imagen_url', e.target.value)} placeholder="https://..." className="w-full border border-gray-300 rounded px-3 py-2 mt-1" />
+          <label className="text-sm text-gray-600">Foto del producto</label>
+          <div className="mt-1 flex items-center gap-4">
+            <div className="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0">
+              {form.imagen_url ? (
+                <img src={form.imagen_url} alt="" className="w-full h-full object-cover" />
+              ) : (
+                <span className="text-gray-300 text-xs">Sin foto</span>
+              )}
+            </div>
+            <div>
+              <input type="file" accept="image/*" onChange={handleImagenChange} disabled={subiendoImagen} className="text-sm" />
+              {subiendoImagen && <p className="text-xs text-gray-400 mt-1">Subiendo...</p>}
+            </div>
+          </div>
         </div>
+
         <label className="flex items-center gap-2 text-sm text-gray-600">
           <input type="checkbox" checked={form.activo} onChange={(e) => handleChange('activo', e.target.checked)} />
           Producto activo (visible en la tienda)
@@ -118,7 +154,7 @@ function AdminProductForm() {
 
         {error && <p className="text-red-500 text-sm">{error}</p>}
 
-        <button type="submit" disabled={guardando} className="w-full bg-blue-600 text-white py-2.5 rounded-lg font-medium hover:bg-blue-700 transition disabled:bg-gray-300">
+        <button type="submit" disabled={guardando || subiendoImagen} className="w-full bg-blue-600 text-white py-2.5 rounded-lg font-medium hover:bg-blue-700 transition disabled:bg-gray-300">
           {guardando ? 'Guardando...' : esEdicion ? 'Guardar cambios' : 'Crear producto'}
         </button>
       </form>
