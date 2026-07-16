@@ -59,7 +59,7 @@ function ProductDetail() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
         <div className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
           {producto.imagen_url ? (
-            <img src={producto.imagen_url} alt={producto.nombre} className="w-full h-full object-cover rounded-lg" />
+            <img src={producto.imagen_url} alt={producto.nombre} className="w-full h-full object-contain rounded-lg" />
           ) : (
             <span className="text-gray-300">Sin foto</span>
           )}
