@@ -11,7 +11,7 @@ function ProductCard({ producto }) {
           <img
             src={producto.imagen_url}
             alt={producto.nombre}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
           />
         ) : (
           <span className="text-gray-300 text-sm">Sin foto</span>

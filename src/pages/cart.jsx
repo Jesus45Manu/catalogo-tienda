@@ -26,7 +26,7 @@ function Cart() {
           <div key={item.id} className="flex items-center gap-4 bg-white rounded-lg shadow-sm p-4">
             <div className="w-16 h-16 bg-gray-100 rounded flex items-center justify-center flex-shrink-0 overflow-hidden">
               {item.imagen_url ? (
-                <img src={item.imagen_url} alt={item.nombre} className="w-full h-full object-cover rounded" />
+                <img src={item.imagen_url} alt={item.nombre} className="w-full h-full object-contain rounded" />
               ) : (
                 <span className="text-gray-300 text-xs">Sin foto</span>
               )}

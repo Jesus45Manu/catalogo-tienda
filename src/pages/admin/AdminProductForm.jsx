@@ -135,7 +135,7 @@ function AdminProductForm() {
           <div className="mt-1 flex items-center gap-4">
             <div className="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0">
               {form.imagen_url ? (
-                <img src={form.imagen_url} alt="" className="w-full h-full object-cover" />
+                <img src={form.imagen_url} alt="" className="w-full h-full object-contain" />
               ) : (
                 <span className="text-gray-300 text-xs">Sin foto</span>
               )}
