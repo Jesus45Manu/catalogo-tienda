@@ -4,22 +4,22 @@ function ProductCard({ producto }) {
   return (
     <Link
       to={`/producto/${producto.id}`}
-      className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition flex flex-col"
+      className="group bg-surface border border-line rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col"
     >
-      <div className="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
+      <div className="aspect-square bg-bg flex items-center justify-center overflow-hidden">
         {producto.imagen_url ? (
           <img
             src={producto.imagen_url}
             alt={producto.nombre}
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
           />
         ) : (
-          <span className="text-gray-300 text-sm">Sin foto</span>
+          <span className="text-ink-soft/50 text-sm">Sin foto</span>
         )}
       </div>
       <div className="p-3 flex-1 flex flex-col">
-        <p className="text-sm text-gray-700 line-clamp-2 flex-1">{producto.nombre}</p>
-        <p className="text-lg font-bold text-gray-900 mt-2">
+        <p className="text-sm text-ink line-clamp-2 flex-1">{producto.nombre}</p>
+        <p className="font-display text-lg font-semibold text-accent-dark mt-2">
           ${producto.precio.toFixed(2)}
         </p>
       </div>

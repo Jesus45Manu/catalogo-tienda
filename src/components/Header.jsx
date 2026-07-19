@@ -14,44 +14,45 @@ function Header() {
   }
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
+    <header className="bg-surface border-b border-line sticky top-0 z-50">
+      <div className="h-1 bg-brand" />
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
-        <Link to="/" className="text-xl font-bold text-blue-600 whitespace-nowrap">
+        <Link to="/" className="font-display text-2xl font-semibold text-brand whitespace-nowrap tracking-tight">
           Mi Tienda
         </Link>
 
-        <div className="flex-1 flex items-center bg-gray-100 rounded-lg px-3 py-2">
-          <Search size={18} className="text-gray-400" />
+        <div className="flex-1 flex items-center bg-bg border border-line rounded-full px-4 py-2 focus-within:ring-2 focus-within:ring-accent transition">
+          <Search size={18} className="text-ink-soft" />
           <input
             type="text"
             placeholder="Buscar productos..."
-            className="bg-transparent outline-none px-2 flex-1 text-sm"
+            className="bg-transparent outline-none px-2 flex-1 text-sm placeholder:text-ink-soft"
           />
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-5">
           {esAdmin && (
-            <Link to="/admin/productos" className="flex flex-col items-center text-gray-600 hover:text-blue-600">
+            <Link to="/admin/productos" className="flex flex-col items-center text-ink-soft hover:text-brand transition-colors hover:-translate-y-0.5 duration-150">
               <Settings size={22} />
-              <span className="text-xs hidden sm:block">Panel admin</span>
+              <span className="text-xs hidden sm:block mt-0.5">Panel admin</span>
             </Link>
           )}
-          <Link to="/cuenta" className="flex flex-col items-center text-gray-600 hover:text-blue-600">
+          <Link to="/cuenta" className="flex flex-col items-center text-ink-soft hover:text-brand transition-colors hover:-translate-y-0.5 duration-150">
             <UserCircle size={22} />
-            <span className="text-xs hidden sm:block">Cuenta</span>
+            <span className="text-xs hidden sm:block mt-0.5">Cuenta</span>
           </Link>
-          <button onClick={handleSalir} className="flex flex-col items-center text-gray-600 hover:text-blue-600">
+          <button onClick={handleSalir} className="flex flex-col items-center text-ink-soft hover:text-brand transition-colors hover:-translate-y-0.5 duration-150">
             <LogOut size={22} />
-            <span className="text-xs hidden sm:block">Salir</span>
+            <span className="text-xs hidden sm:block mt-0.5">Salir</span>
           </button>
-          <Link to="/carrito" className="relative flex flex-col items-center text-gray-600 hover:text-blue-600">
+          <Link to="/carrito" className="relative flex flex-col items-center text-ink-soft hover:text-brand transition-colors hover:-translate-y-0.5 duration-150">
             <ShoppingCart size={22} />
             {totalItems > 0 && (
-              <span className="absolute -top-1 -right-2 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              <span className="absolute -top-1.5 -right-2.5 bg-accent text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
                 {totalItems}
               </span>
             )}
-            <span className="text-xs hidden sm:block">Carrito</span>
+            <span className="text-xs hidden sm:block mt-0.5">Carrito</span>
           </Link>
         </div>
       </div>
