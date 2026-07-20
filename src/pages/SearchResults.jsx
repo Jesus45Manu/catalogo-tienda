@@ -21,12 +21,7 @@ function SearchResults() {
         return
       }
       setCargando(true)
-      const { data, error } = await supabase
-        .from('productos')
-        .select('*')
-        .or(`nombre.ilike.%${query}%,descripcion.ilike.%${query}%`)
-        .eq('activo', true)
-        .order('nombre')
+     const { data, error } = await supabase.rpc('buscar_productos', { termino: query })
 
       if (!error) setProductos(data)
       setCargando(false)
