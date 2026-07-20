@@ -9,6 +9,7 @@ import Register from './pages/Register'
 import Checkout from './pages/Checkout'
 import OrderConfirmation from './pages/OrderConfirmation'
 import Account from './pages/Account'
+import SearchResults from './pages/SearchResults'
 import ProtectedRoute from './components/ProtectedRoute'
 import AdminRoute from './components/AdminRoute'
 import AdminLayout from './pages/admin/AdminLayout'
@@ -19,7 +20,7 @@ import AdminOrders from './pages/admin/AdminOrders'
 
 function TiendaLayout({ children }) {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-bg">
       <Header />
       {children}
     </div>
@@ -35,6 +36,7 @@ function App() {
       <Route path="/" element={<ProtectedRoute><TiendaLayout><Home /></TiendaLayout></ProtectedRoute>} />
       <Route path="/categoria/:id" element={<ProtectedRoute><TiendaLayout><CategoryProducts /></TiendaLayout></ProtectedRoute>} />
       <Route path="/producto/:id" element={<ProtectedRoute><TiendaLayout><ProductDetail /></TiendaLayout></ProtectedRoute>} />
+      <Route path="/buscar" element={<ProtectedRoute><TiendaLayout><SearchResults /></TiendaLayout></ProtectedRoute>} />
       <Route path="/carrito" element={<ProtectedRoute><TiendaLayout><Cart /></TiendaLayout></ProtectedRoute>} />
       <Route path="/checkout" element={<ProtectedRoute><TiendaLayout><Checkout /></TiendaLayout></ProtectedRoute>} />
       <Route path="/pedido-confirmado/:id" element={<ProtectedRoute><TiendaLayout><OrderConfirmation /></TiendaLayout></ProtectedRoute>} />
